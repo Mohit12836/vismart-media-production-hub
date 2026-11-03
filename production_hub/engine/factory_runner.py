@@ -70,7 +70,7 @@ def render(job):
     props_file = folder / "props.json"
     props_file.write_text(json.dumps(props, ensure_ascii=False), encoding="utf-8")
     cli = REMOTION / "node_modules" / "@remotion" / "cli" / "remotion-cli.js"
-    command = ["node", str(cli), "render", "src/index.ts", "FactoryVideo", str(target),
+    command = ["node", str(cli), "render", "src/factory-index.tsx", "FactoryVideo", str(target),
                f"--props={props_file}", "--codec=h264", "--crf=20", "--concurrency=1"]
     with open(folder / "render.log", "w", encoding="utf-8") as log:
         result = subprocess.run(command, cwd=REMOTION, stdout=log, stderr=subprocess.STDOUT, timeout=7200)
