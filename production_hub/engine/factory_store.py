@@ -150,6 +150,9 @@ def submit(automation_id, items):
                        "title": str(item.get("title", lines[0]))[:180], "brand": channel_config["brand"],
                        "accent": channel_config["accent"], "destination": channel_config["destination"],
                        "sources": str(item.get("sources", ""))[:4000], "rights_confirmed": item.get("rights_confirmed") is True}
+            from .creative_plan import DIRECTED_RECIPES, validate_plan
+            if config['recipe'] in DIRECTED_RECIPES:
+                payload['creative_plan'] = validate_plan(item.get('creative_plan'), lines)
             prepared.append((fingerprint, payload))
         added, duplicates = [], 0
         for fingerprint, payload in prepared:

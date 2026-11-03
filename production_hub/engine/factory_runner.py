@@ -50,7 +50,10 @@ def render(job):
     props = {"scenes": payload["scenes"], "duration": payload["duration"], "format": payload["format"],
              "layout": RECIPES[payload["recipe"]].get("layout", "story"), "brand": payload["brand"],
              "accent": payload["accent"], "assets": payload["assets"], "audio": None}
-    if payload["mode"] == "voice":
+    from .creative_plan import DIRECTED_RECIPES, build_directed_assets
+    if payload['recipe'] in DIRECTED_RECIPES:
+        props.update(build_directed_assets(job, folder, REMOTION/'public'))
+    elif payload["mode"] == "voice":
         from .voice_engine import generate_speech
         audio_rel = f"factory-audio/{job['id']}.mp3"
         audio_path = REMOTION / "public" / audio_rel
@@ -124,7 +127,9 @@ def drive_upload(job):
     folder = store.BASE / job["output"]
     final_id = None
     import mimetypes
-    for path in [folder, folder.with_name("cover.jpg"), folder.with_name("caption.txt"), folder.with_name("script.txt"), folder.with_name("manifest.json")]:
+    package = [folder, folder.with_name("cover.jpg"), folder.with_name("caption.txt"), folder.with_name("script.txt"), folder.with_name("manifest.json")]
+    package += [folder.with_name(name) for name in ('subtitles.srt','words.json','timing.json','creative-plan.json') if folder.with_name(name).is_file()]
+    for path in package:
         query = f"'{parent}' in parents and trashed = false and appProperties has {{ key='factory_job' and value='{job['id']}' }} and name='{job['id']}_{path.name}'"
         found = requests.get(base, headers=headers, params={"q": query, "fields": "files(id)", "supportsAllDrives": "true", "includeItemsFromAllDrives": "true"}, timeout=30)
         found.raise_for_status()
@@ -183,7 +188,7 @@ def run_once():
         try:
             render(job)
         except Exception as exc:
-            store.update(job["id"], status="failed", error=str(exc)[:1200])
+            store.update(job["id"], status="failed", error=(str(exc) or f"{type(exc).__name__}: provider or render did not finish")[:1200])
         return True
     with store.connection() as db:
         ready = [store.unpack(row) for row in db.execute("SELECT * FROM jobs WHERE status IN ('awaiting_approval','approved') ORDER BY rowid")]

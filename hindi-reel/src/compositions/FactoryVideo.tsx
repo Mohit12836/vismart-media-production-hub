@@ -1,5 +1,7 @@
 import React from "react";
 import {AbsoluteFill, Audio, Img, Sequence, interpolate, staticFile, useCurrentFrame, useVideoConfig} from "remotion";
+import {DirectedVideo} from "../creative/DirectedVideo";
+import type {CreativePlan, DirectedTiming} from "../creative/types";
 
 export type FactoryProps = {
   scenes: string[];
@@ -10,6 +12,10 @@ export type FactoryProps = {
   accent: string;
   assets: string[];
   audio: string | null;
+  creative_plan?: CreativePlan;
+  directed_timeline?: DirectedTiming[];
+  creative_style?: string;
+  soundkit?: boolean;
 };
 
 const Scene: React.FC<{text: string; index: number; count: number; layout: string; accent: string; asset?: string}> = ({text, index, count, layout, accent, asset}) => {
@@ -32,9 +38,10 @@ const Scene: React.FC<{text: string; index: number; count: number; layout: strin
   </AbsoluteFill>;
 };
 
-export const FactoryVideo: React.FC<FactoryProps> = ({scenes, layout, brand, accent, assets, audio}) => {
+export const FactoryVideo: React.FC<FactoryProps> = ({scenes, layout, brand, accent, assets, audio, creative_plan, directed_timeline, creative_style, soundkit}) => {
   const frame = useCurrentFrame();
   const {durationInFrames, width, height} = useVideoConfig();
+  if (creative_plan && directed_timeline && creative_style) return <DirectedVideo creative_plan={creative_plan} directed_timeline={directed_timeline} creative_style={creative_style} brand={brand} soundkit={soundkit}/>;
   return <AbsoluteFill>
     {scenes.map((text, index) => {
       const from = Math.round(index * durationInFrames / scenes.length);

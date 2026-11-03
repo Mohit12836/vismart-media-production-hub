@@ -51,5 +51,18 @@ class ApiTests(unittest.TestCase):
         self.assertEqual(self.client.post("/api/render", json={"custom_output_name": "../runtime/admin.token"}).status_code, 422)
         self.assertEqual(self.client.post("/api/batch/start").status_code, 409)
 
+    def test_directed_sample_contract_survives_submission(self):
+        self.assertEqual(self.client.get('/api/factory/creative/examples').status_code,401)
+        self.client.post('/api/factory/session',headers={'Authorization':'Bearer test-access'})
+        example=self.client.get('/api/factory/creative/examples').json()['variants'][0]
+        self.assertEqual(len(self.client.get('/api/factory/state').json()['creative_skills']),6)
+        channel=self.client.post('/api/factory/channels',json={'name':'Creative review'}).json()['id']
+        auto=self.client.post('/api/factory/automations',json={'name':'Directed','channel_id':channel,'recipe':example['recipe'],'mode':'voice'}).json()['id']
+        with patch('engine.factory_runner.start'):
+            response=self.client.post('/api/factory/jobs',json={'automation_id':auto,'items':[example['item']]})
+        self.assertEqual(response.status_code,200)
+        job=store.get_job(response.json()['added'][0])
+        self.assertEqual(job['payload']['creative_plan']['first_frame'],example['item']['creative_plan']['first_frame'])
+
 if __name__ == "__main__":
     unittest.main()

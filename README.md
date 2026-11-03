@@ -42,8 +42,21 @@ Each job has a separate directory and voice file. Restart during render marks th
 | Canva template | Import a Canva-exported MP4 |
 | Flow cinematic | Import an edited Flow MP4 |
 | Screen demo | Import an edited screen-recorded MP4 |
+| Directed motion ad | Visual-hook plan + timed native scene graphics |
+| Directed chat story | Fiction-labelled story beats + timed conversation scenes |
+| A/B choice + reveal | Two reply choices, reveal and explanation |
 
-Reels/stories are 1080×1920; landscape videos 1920×1080. Native landscape plans support 31–900 seconds. Voice must fit the requested duration; overlong audio fails explicitly rather than being truncated. Scenes currently share time evenly; word-timed captions, beat matching, automatic stock discovery, music selection, intelligent script generation and platform analytics are not implemented.
+Reels/stories are 1080×1920; landscape videos 1920×1080. Native landscape plans support 31–900 seconds. Voice must fit the requested duration; overlong audio fails explicitly rather than being truncated. Basic recipes share scene time evenly. The three directed recipes derive scene lengths and word highlights from actual TTS metadata, and include original synthesized SFX/percussion. Automatic stock discovery, intelligent script generation and platform analytics are not implemented.
+
+### Installed creative skills and sample comparison
+
+Six reviewed project skills are installed in `.agents/skills/`: Virality, Storytelling Hooks, Retention Audit, Channel Formula, Remotion Motion Graphics and reelcn. `production_hub/creative_skills.json` pins source versions; each copy includes its MIT notice. These are agent instructions, not a running autonomous planning service. Their authors' performance claims are not independent evidence or a virality guarantee.
+
+The dashboard's **Creative sample** control loads one of three original plans from `production_hub/examples/creative-comparison.json`. Select your channel, save the corresponding voice automation, review the plan and queue it. `/api/factory/creative/examples` exposes the same authenticated input contract for n8n/Hermes. Each `creative_plan` specifies audience, first-frame action, payoff and a visual/headline for every spoken scene. Supported visuals are inbox, message, steps, choices, answer, shop, handoff and CTA. The samples are editable educational chat scenarios, not real customer testimonials.
+
+Directed recipes need `NotoSansDevanagari-Regular.ttf` and `NotoSansDevanagari-Bold.ttf` in `hindi-reel/public/factory-fonts/`. On an existing Linux VPS with the Noto package, copy these from `/usr/share/fonts/truetype/noto/`; do not add private/proprietary fonts to source control. Font assets, generated sound effects and job audio are ignored by git. Voice timestamps are requested from Edge TTS, cached per job/text/voice, and saved in `words.json`, `timing.json` and `subtitles.srt`. Missing word metadata or overlong narration fails explicitly. `creative-plan.json` and these optional subtitle/timing files are included in the Drive package when present.
+
+Visual review still needs the agent/operator: inspect frame 0, 0.5s, 1.5s, 3s and each scene in a contact sheet. Technical QA does not replace visual inspection. Retention Audit/Channel Formula are installed for future use with real same-channel data; this release does not fabricate a performance score or connect analytics.
 
 For photo stories, place images in `hindi-reel/public/factory-assets/` and supply one filename per scene in `assets`. Only local PNG/JPG/WEBP filenames are accepted. External edited MP4s are imported with `PUT /api/factory/jobs/{id}/source` (raw MP4, max 200 MB) and must match the format/duration plan. This is an actual import boundary, not unattended provider generation.
 

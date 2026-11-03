@@ -1,4 +1,5 @@
 import hmac
+import json
 import os
 from pathlib import Path
 from fastapi import APIRouter, HTTPException, Request
@@ -39,7 +40,13 @@ async def state(request: Request):
     await authorize(request)
     return {"channels": store.list_rows("channels"), "automations": store.list_rows("automations"), "jobs": store.list_rows("jobs"),
             "recipes": RECIPES, "integrations": runner.integrations(), "daily_limit": int(os.environ.get("FACTORY_DAILY_LIMIT", "100")),
-            "worker": bool(runner.worker and runner.worker.is_alive()), "enabled": store.enabled(), "timezone": "Asia/Kolkata"}
+            "worker": bool(runner.worker and runner.worker.is_alive()), "enabled": store.enabled(), "timezone": "Asia/Kolkata",
+            "creative_skills": json.loads((store.BASE/'creative_skills.json').read_text(encoding='utf8'))['sources']}
+
+@router.get('/creative/examples')
+async def creative_examples(request: Request):
+    await authorize(request)
+    return json.loads((store.BASE/'examples/creative-comparison.json').read_text(encoding='utf8'))
 
 @router.post("/control/{action}")
 async def control(action: str, request: Request):
@@ -146,7 +153,7 @@ async def import_source(job_id: str, request: Request):
 @router.get("/jobs/{job_id}/file/{filename}")
 async def download(job_id: str, filename: str, request: Request):
     await authorize(request)
-    if filename not in ("final.mp4", "cover.jpg", "caption.txt", "script.txt", "manifest.json", "render.log"):
+    if filename not in ("final.mp4", "cover.jpg", "caption.txt", "script.txt", "manifest.json", "render.log", "subtitles.srt", "words.json", "timing.json", "creative-plan.json"):
         raise HTTPException(404)
     try:
         job = store.get_job(job_id)
