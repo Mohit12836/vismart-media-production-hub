@@ -1,0 +1,86 @@
+[
+  {
+    "id": "s01",
+    "chip": "🚨 DENTIST ALERT",
+    "line1": "Dentist हैं?",
+    "line2": "हर महीने ₹2 लाख का नुकसान!",
+    "accent": "#FF2E63",
+    "subtitle": "Agar aap Dentist hain toh har mahine 50 patients dusre clinics ja rahe hain!",
+    "highlights": [
+      "Dentist",
+      "50 patients",
+      "dusre clinics"
+    ],
+    "audio": "audio/s01.mp3",
+    "durationSec": 10.15,
+    "frames": 311
+  },
+  {
+    "id": "s02",
+    "chip": "🔍 GOOGLE SEARCH",
+    "line1": "सड़क पर बोर्ड नहीं,",
+    "line2": "Google पर सर्च करते हैं!",
+    "accent": "#00F2FE",
+    "subtitle": "Dard hone par log seedhe Google karte hain Best Dentist Near Me! Website nahi toh patient gaya!",
+    "highlights": [
+      "Google",
+      "Best Dentist",
+      "Website nahi"
+    ],
+    "audio": "audio/s02.mp3",
+    "durationSec": 11.33,
+    "frames": 346
+  },
+  {
+    "id": "s03",
+    "chip": "⚡ 1-CLICK BOOKING",
+    "line1": "आपकी वेबसाइट पर,",
+    "line2": "WhatsApp 1-Click बुकिंग!",
+    "accent": "#10B981",
+    "subtitle": "Aapki website par 1-Click direct WhatsApp appointment aur Before-After Smile gallery!",
+    "highlights": [
+      "1-Click",
+      "WhatsApp",
+      "Before-After",
+      "Smile"
+    ],
+    "audio": "audio/s03.mp3",
+    "durationSec": 10.39,
+    "frames": 318
+  },
+  {
+    "id": "s04",
+    "chip": "💰 10X PROFIT MATHS",
+    "line1": "महीने में सिर्फ 2 मरीज़,",
+    "line2": "और पूरा खर्चा 100% वसूल!",
+    "accent": "#F59E0B",
+    "subtitle": "Seedha maths: mahine me bas 2 Root Canals ya 1 Implant aaya toh 30,000 profit! Website 100% free!",
+    "highlights": [
+      "Seedha maths",
+      "Root Canals",
+      "Implant",
+      "30,000 profit",
+      "100% free"
+    ],
+    "audio": "audio/s04.mp3",
+    "durationSec": 10.68,
+    "frames": 327
+  },
+  {
+    "id": "s05",
+    "chip": "📞 DOCTOR SPECIAL OFFER",
+    "line1": "अपनी क्लिनिक को ब्रांड बनाएं,",
+    "line2": "Mohit Jain: 6263879076",
+    "accent": "#10B981",
+    "subtitle": "Apne shehar me No.1 Clinic baniye! Free demo ke liye abhi call ya WhatsApp karein: Mohit Jain 6263879076!",
+    "highlights": [
+      "No.1 Clinic",
+      "Free demo",
+      "Mohit Jain",
+      "6263879076"
+    ],
+    "audio": "audio/s05.mp3",
+    "durationSec": 12.67,
+    "frames": 387
+  }
+]
