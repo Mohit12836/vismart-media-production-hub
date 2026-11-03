@@ -5,12 +5,23 @@ import { MyComposition, TOTAL_DURATION } from "./Composition";
 import { compositionSchema } from "./schema";
 import { SilentKineticReel, SILENT_KINETIC_DURATION } from "./compositions/SilentKineticReel";
 import { LongExplainer16x9, LONG_EXPLAINER_DURATION } from "./compositions/LongExplainer16x9";
+import { FactoryVideo } from "./compositions/FactoryVideo";
 
 loadFont();
 
 export const RemotionRoot: React.FC = () => {
   return (
     <>
+      <Composition
+        id="FactoryVideo"
+        component={FactoryVideo}
+        durationInFrames={750}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{scenes: ["अपनी पहली कहानी लिखें", "अगले दृश्य में उसका जवाब दें"], duration: 25, format: "reel", layout: "story", brand: "Your channel", accent: "#2563eb", assets: [], audio: null}}
+        calculateMetadata={({props}) => ({durationInFrames: Math.round(props.duration * 30), width: props.format === "long" ? 1920 : 1080, height: props.format === "long" ? 1080 : 1920})}
+      />
       <Composition
         id="Main"
         component={MyComposition}

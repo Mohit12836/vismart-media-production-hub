@@ -6,13 +6,12 @@ import edge_tts
 
 def get_audio_duration(file_path: str) -> float:
     """Accurately extracts audio duration using ffmpeg."""
-    cmd = ["ffmpeg", "-i", file_path]
-    result = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-    match = re.search(r"Duration:\s*(\d+):(\d+):(\d+\.\d+)", result.stderr)
-    if match:
-        h, m, s = map(float, match.groups())
-        return round(h * 3600 + m * 60 + s, 2)
-    return 10.0
+    cmd = ["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "default=noprint_wrappers=1:nokey=1", file_path]
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=30, check=True)
+    seconds = float(result.stdout.strip())
+    if seconds <= 0:
+        raise ValueError("Audio has no measurable duration")
+    return round(seconds, 2)
 
 async def generate_speech(text: str, output_path: str, voice: str = "hi-IN-MadhurNeural", rate: str = "+10%", pitch: str = "+0Hz") -> float:
     """

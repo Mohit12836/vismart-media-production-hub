@@ -38,3 +38,7 @@ ENV/
 .DS_Store
 Thumbs.db
 temp_preview.mp3
+production_hub/runtime/
+production_hub/outputs/factory/
+hindi-reel/public/factory-audio/
+hindi-reel/public/factory-assets/

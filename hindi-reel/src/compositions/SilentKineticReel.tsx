@@ -30,7 +30,6 @@ export const SilentKineticReel: React.FC<SilentKineticProps> = ({
   brandName = "VISMART STUDIO",
 }) => {
   const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
 
   // Background subtle gradient pulse
   const bgScale = interpolate(Math.sin(frame / 20), [-1, 1], [1, 1.05]);
