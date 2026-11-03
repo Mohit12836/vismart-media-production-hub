@@ -10,7 +10,7 @@ from typing import Optional
 from fastapi import FastAPI, BackgroundTasks, HTTPException, Query
 from fastapi.responses import HTMLResponse, FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 # Import Batch Factory Engine
 sys.path.append(str(Path(__file__).resolve().parent.parent))
@@ -41,6 +41,24 @@ MASTER_GENERATOR = BASE_DIR / "master_generator.py"
 VOICE_ENGINE = BASE_DIR / "engine" / "voice_engine.py"
 
 app = FastAPI(title="Vismart Autonomous Media Production Hub")
+from web.factory_api import router as factory_router
+from engine import factory_store, factory_runner
+app.include_router(factory_router)
+
+@app.on_event("startup")
+async def factory_startup():
+    factory_store.init()
+    token_file = factory_store.BASE / "runtime" / "admin.token"
+    if not os.environ.get("FACTORY_ADMIN_TOKEN") and not token_file.exists():
+        import secrets
+        token_file.write_text(secrets.token_urlsafe(32), encoding="utf-8")
+        token_file.chmod(0o600)
+    if os.environ.get("FACTORY_AUTOSTART", "1") == "1":
+        factory_runner.start()
+
+@app.get("/factory", response_class=HTMLResponse)
+async def factory_dashboard():
+    return HTMLResponse((STATIC_DIR / "factory.html").read_text(encoding="utf-8"))
 
 # State tracking for ongoing render
 render_state = {
@@ -61,7 +79,7 @@ class RenderRequest(BaseModel):
     voice: str = "hi-IN-MadhurNeural"
     rate: str = "+10%"
     pitch: str = "+0Hz"
-    custom_output_name: Optional[str] = None
+    custom_output_name: Optional[str] = Field(default=None, pattern=r"^[A-Za-z0-9_-]+(?:\.mp4)?$")
 
 class ScheduleSlot(BaseModel):
     id: str
@@ -122,11 +140,25 @@ def run_render_task(req_dict: dict):
 
 @app.get("/", response_class=HTMLResponse)
 async def serve_index():
-    index_file = STATIC_DIR / "index.html"
+    index_file = STATIC_DIR / "factory.html"
     if not index_file.exists():
         return HTMLResponse("<h1>Dashboard Loading...</h1>")
     with open(index_file, "r", encoding="utf-8") as f:
         return HTMLResponse(f.read())
+
+@app.get("/studio", response_class=HTMLResponse)
+async def legacy_studio():
+    return HTMLResponse((STATIC_DIR / "index.html").read_text(encoding="utf-8"))
+
+@app.middleware("http")
+async def protect_factory_outputs(request, call_next):
+    if (request.url.path.startswith("/api/") and request.url.path != "/api/factory/session") or request.url.path.startswith("/outputs/factory/"):
+        from web.factory_api import authorize
+        try:
+            await authorize(request)
+        except HTTPException as exc:
+            return JSONResponse({"detail": exc.detail}, status_code=exc.status_code)
+    return await call_next(request)
 
 @app.get("/api/status")
 async def get_status():
@@ -152,6 +184,7 @@ class BatchSubmitRequest(BaseModel):
 
 @app.post("/api/batch/submit")
 async def submit_batch(req: BatchSubmitRequest):
+    raise HTTPException(409, "Use the multi-recipe factory at /factory. Legacy batch rendering is disabled to prevent duplicate default videos.")
     count = add_batch_topics(
         topics=req.topics,
         formats=req.formats,
@@ -171,8 +204,7 @@ async def batch_status():
 
 @app.post("/api/batch/start")
 async def batch_start():
-    started = start_batch_worker()
-    return JSONResponse({"status": "started" if started else "already_running"})
+    raise HTTPException(409, "Use the durable factory queue at /factory")
 
 @app.post("/api/batch/pause")
 async def batch_pause():

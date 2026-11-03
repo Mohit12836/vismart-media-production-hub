@@ -27,9 +27,6 @@ export const LongExplainer16x9: React.FC<LongExplainerProps> = ({
   phoneNumber = "6263879076",
   brandName = "VISMART STUDIO",
 }) => {
-  const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
-
   return (
     <AbsoluteFill
       style={{

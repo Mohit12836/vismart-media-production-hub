@@ -1,0 +1,181 @@
+{
+  "brief": "Hindi small-business owners: make the next step clear in WhatsApp replies. Original educational examples; no promised sales results.",
+  "comparison": "Same audience and editorial brief, three different creative treatments. This is a craft/cost test, not a measured performance A/B test.",
+  "variants": [
+    {
+      "name": "Motion explainer",
+      "recipe": "directed_motion",
+      "item": {
+        "title": "मैसेज आया। अगला कदम कहाँ है?",
+        "duration": 30,
+        "scenes": [
+          "आपके मैसेज का जवाब कहाँ अटक गया?",
+          "ग्राहक पूछ रहा है। आपकी चैट नीचे दब गई।",
+          "पहले पूछताछ अलग रखिए। फिर उसका जवाब तय कीजिए।",
+          "जवाब में अगला कदम भी बताइए।",
+          "आज अपनी आखिरी पाँच चैट जाँचिए।"
+        ],
+        "rights_confirmed": true,
+        "sources": "Original educational copy and vector UI demo. No real chat, testimonial or business results. Original synthesized sound effects.",
+        "creative_plan": {
+          "audience": "Hindi-speaking small business owners who answer customer enquiries themselves",
+          "first_frame": "Large illustrated chat phone already visible; an unanswered message slides out before 3 seconds. Overlay opens the gap; voice names the problem.",
+          "payoff": "A clear reply includes a specific next step. Ask viewers to inspect their own recent chats.",
+          "fictional": false,
+          "scenes": [
+            {
+              "visual": "inbox",
+              "headline": "एक मैसेज। फिर खामोशी?",
+              "message": "यह सामान मिलेगा?",
+              "label": "ग्राहक की नज़र से"
+            },
+            {
+              "visual": "message",
+              "headline": "सवाल अभी बाकी है।",
+              "message": "कौन-सा size उपलब्ध है?",
+              "label": "पूछताछ खोने न दें"
+            },
+            {
+              "visual": "steps",
+              "headline": "जवाब का रास्ता बनाइए।",
+              "label": "हर कदम का एक काम"
+            },
+            {
+              "visual": "handoff",
+              "headline": "अगला कदम साफ।",
+              "message": "यह सामान मिलेगा?",
+              "reply": "हाँ। कौन-सा size चाहिए?",
+              "label": "सवाल से बातचीत आगे"
+            },
+            {
+              "visual": "cta",
+              "headline": "अपनी पाँच चैट देखिए।",
+              "message": "मुझे जानकारी चाहिए।",
+              "reply": "ज़रूर। किस चीज़ के बारे में?",
+              "label": "क्या अगला कदम साफ है?"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Chat storytelling",
+      "recipe": "chat_story",
+      "item": {
+        "title": "रवि का अधूरा जवाब",
+        "duration": 30,
+        "scenes": [
+          "रवि की दुकान पर एक मैसेज आया।",
+          "काम के बीच उसने सोचा, थोड़ी देर में जवाब दूँगा।",
+          "शाम को चैट मिली। सवाल अभी भी अधूरा था।",
+          "अगली बार उसने पहले ही अगला कदम साफ लिखा।",
+          "छोटा जवाब भी काम का हो सकता है। बात आगे बढ़ाइए।"
+        ],
+        "rights_confirmed": true,
+        "sources": "Original fictional shopkeeper story, labelled throughout. Vector illustrations and original synthesized sound effects; no real testimonial or result claim.",
+        "creative_plan": {
+          "audience": "Hindi-speaking shop owners balancing counter work and customer messages",
+          "first_frame": "A shop and customer message are already visible; message arrives while the shop illustration shifts in. Opening overlay hints at the unresolved answer.",
+          "payoff": "The final example changes an incomplete reply into a useful next question, resolving the opening message.",
+          "fictional": true,
+          "scenes": [
+            {
+              "visual": "shop",
+              "headline": "एक मैसेज रह गया।",
+              "message": "यह शर्ट मिलेगी?",
+              "reply": "अभी देखता हूँ…",
+              "label": "दुकान पर काम चल रहा था"
+            },
+            {
+              "visual": "message",
+              "headline": "बस थोड़ी देर…",
+              "message": "कौन-सा size मिलेगा?",
+              "label": "देर होती गई"
+            },
+            {
+              "visual": "inbox",
+              "headline": "सवाल वहीं रह गया।",
+              "message": "जवाब का इंतज़ार है…",
+              "label": "शाम की अधूरी चैट"
+            },
+            {
+              "visual": "handoff",
+              "headline": "इस बार अगला सवाल।",
+              "message": "यह शर्ट मिलेगी?",
+              "reply": "हाँ। आपको कौन-सा size चाहिए?",
+              "label": "साफ जवाब, साफ अगला कदम"
+            },
+            {
+              "visual": "cta",
+              "headline": "बात आगे बढ़ाइए।",
+              "message": "यह शर्ट मिलेगी?",
+              "reply": "ज़रूर। अपना size बताइए।",
+              "label": "शुरुआत उसी मैसेज से"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "A/B reply quiz",
+      "recipe": "choice_quiz",
+      "item": {
+        "title": "कौन-सा जवाब बातचीत आगे बढ़ाता है?",
+        "duration": 30,
+        "scenes": [
+          "ग्राहक ने पूछा, यह शर्ट मिलेगी? कौन सा जवाब बेहतर है?",
+          "पहला जवाब, हाँ मिल जाएगी।",
+          "दूसरा जवाब, हाँ। आपको कौन सा साइज चाहिए?",
+          "दूसरे जवाब में ग्राहक का अगला कदम साफ है।",
+          "अब अपनी अगली चैट में एक साफ सवाल जोड़िए।"
+        ],
+        "rights_confirmed": true,
+        "sources": "Original communication-skills quiz with illustrative replies, not an experimentally proven sales outcome. Vector UI and original synthesized sound effects.",
+        "creative_plan": {
+          "audience": "Hindi-speaking small business owners learning to write useful customer replies",
+          "first_frame": "Two oversized reply options visible immediately; cards stagger and settle. Viewer chooses before the answer scene.",
+          "payoff": "B is preferred for this example because it gives the customer a specific next question, not because of a claimed conversion rate.",
+          "fictional": false,
+          "scenes": [
+            {
+              "visual": "choices",
+              "headline": "आप कौन-सा जवाब देंगे?",
+              "option_a": "हाँ, मिल जाएगी।",
+              "option_b": "हाँ। कौन-सा size चाहिए?",
+              "label": "ग्राहक: यह शर्ट मिलेगी?"
+            },
+            {
+              "visual": "choices",
+              "headline": "सिर्फ ‘हाँ’ काफी है?",
+              "option_a": "हाँ, मिल जाएगी।",
+              "option_b": "हाँ। कौन-सा size चाहिए?",
+              "label": "सोचिए: ग्राहक अब क्या लिखेगा?"
+            },
+            {
+              "visual": "choices",
+              "headline": "अगला सवाल भी जोड़ें।",
+              "option_a": "हाँ, मिल जाएगी।",
+              "option_b": "हाँ। कौन-सा size चाहिए?",
+              "label": "कौन-सा रास्ता ज्यादा साफ है?"
+            },
+            {
+              "visual": "answer",
+              "headline": "इस उदाहरण में: B",
+              "option_a": "हाँ, मिल जाएगी।",
+              "option_b": "हाँ। कौन-सा size चाहिए?",
+              "correct": "B",
+              "label": "कारण: अगला कदम साफ है"
+            },
+            {
+              "visual": "cta",
+              "headline": "अब अपनी चैट में आज़माएँ।",
+              "message": "मुझे जानकारी चाहिए।",
+              "reply": "किस चीज़ के बारे में जानना चाहेंगे?",
+              "label": "एक साफ अगला सवाल"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

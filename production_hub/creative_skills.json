@@ -1,0 +1,59 @@
+{
+  "sources": [
+    {
+      "name": "virality",
+      "repository": "https://github.com/Ootto-AI/claude-content-skills",
+      "commit": "3a63a140cc40808d4187dfcd822e6120ceabb2bf",
+      "path": "skills/virality",
+      "license": "MIT",
+      "scope": "project",
+      "installed": true
+    },
+    {
+      "name": "storytelling-hooks",
+      "repository": "https://github.com/yaxeen/storytelling-skills",
+      "commit": "24ef3c1e3d7fde66cc5f1c5953cd6c1d7afc0b4f",
+      "path": "skills/storytelling-hooks",
+      "license": "MIT",
+      "scope": "project",
+      "installed": true
+    },
+    {
+      "name": "retention-audit",
+      "repository": "https://github.com/yaxeen/storytelling-skills",
+      "commit": "24ef3c1e3d7fde66cc5f1c5953cd6c1d7afc0b4f",
+      "path": "skills/retention-audit",
+      "license": "MIT",
+      "scope": "project",
+      "installed": true
+    },
+    {
+      "name": "channel-formula",
+      "repository": "https://github.com/yaxeen/storytelling-skills",
+      "commit": "24ef3c1e3d7fde66cc5f1c5953cd6c1d7afc0b4f",
+      "path": "skills/channel-formula",
+      "license": "MIT",
+      "scope": "project",
+      "installed": true
+    },
+    {
+      "name": "remotion-motion-graphics",
+      "repository": "https://github.com/haidrrrry/claude-remotion-skill",
+      "commit": "1dcbe5e3fc6cf970bd10d3cc05f0a8a5d19d0383",
+      "path": "remotion-motion-graphics",
+      "license": "MIT",
+      "scope": "project",
+      "installed": true
+    },
+    {
+      "name": "reelcn",
+      "repository": "https://github.com/Karanjot786/reelcn",
+      "commit": "4a7ca308dd0c854916c005655b2aa71d291bf4b9",
+      "path": "skills/reelcn",
+      "license": "MIT",
+      "scope": "project",
+      "installed": true
+    }
+  ],
+  "note": "Author-reported results are not verified performance guarantees. No upstream installers or generation scripts were executed."
+}
