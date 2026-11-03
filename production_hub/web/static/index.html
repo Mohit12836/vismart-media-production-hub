@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="hi" class="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vismart AI Media Hub — Studio & Bulk Factory</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    body {
+      background-color: #F8FAFC;
+      color: #0F172A;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      overflow-x: hidden;
+    }
+    .studio-card {
+      background: #FFFFFF;
+      border: 2px solid #0F172A;
+      box-shadow: 4px 4px 0px #0F172A;
+      border-radius: 1rem;
+      transition: all 0.2s ease;
+    }
+    .studio-card:hover {
+      box-shadow: 6px 6px 0px #0F172A;
+      transform: translateY(-1px);
+    }
+    .studio-input {
+      background: #FFFFFF;
+      border: 2px solid #0F172A;
+      color: #0F172A;
+      font-weight: 600;
+    }
+    .studio-input:focus {
+      outline: none;
+      border-color: #2563EB;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+    }
+    .btn-brutal {
+      border: 2px solid #0F172A;
+      box-shadow: 3px 3px 0px #0F172A;
+      transition: all 0.15s ease;
+    }
+    .btn-brutal:hover {
+      box-shadow: 1px 1px 0px #0F172A;
+      transform: translate(2px, 2px);
+    }
+    .btn-brutal:active {
+      box-shadow: 0px 0px 0px #0F172A;
+      transform: translate(3px, 3px);
+    }
+    .slider-custom {
+      accent-color: #0F172A;
+    }
+  </style>
+</head>
+<body class="min-h-screen p-3 md:p-6 flex flex-col items-center">
+
+  <!-- Top Container -->
+  <div class="w-full max-w-6xl space-y-6">
+
+    <!-- Header Navigation -->
+    <header class="studio-card p-4 md:p-6 flex flex-col md:flex-row justify-between items-center gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-12 h-12 rounded-xl bg-slate-900 text-white flex items-center justify-center text-2xl font-black shadow-md border-2 border-slate-900">
+          🎬
+        </div>
+        <div>
+          <h1 class="text-xl md:text-2xl font-black tracking-tight text-slate-900 flex items-center gap-2">
+            VISMART AI MEDIA HUB
+            <span class="text-xs bg-slate-900 text-white font-extrabold px-2.5 py-0.5 rounded-full">STUDIO & FACTORY</span>
+          </h1>
+          <p class="text-xs text-slate-600 font-semibold">100+ Video Batch Factory • 1080x1920 HD & 16:9 4K Engine • Multi-Format Matrix</p>
+        </div>
+      </div>
+
+      <!-- Live VPS Services Status Badges -->
+      <div class="flex flex-wrap items-center gap-2 text-xs font-bold">
+        <a href="http://72.61.232.114:9119" target="_blank" class="px-3 py-1.5 rounded-lg bg-emerald-50 text-emerald-800 border-2 border-slate-900 flex items-center gap-1.5 hover:bg-emerald-100 transition shadow-sm">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          Hermes Agent :9119
+        </a>
+        <a href="http://72.61.232.114:8501" target="_blank" class="px-3 py-1.5 rounded-lg bg-blue-50 text-blue-800 border-2 border-slate-900 flex items-center gap-1.5 hover:bg-blue-100 transition shadow-sm">
+          <span class="w-2 h-2 rounded-full bg-blue-500"></span>
+          MoneyPrinter :8501
+        </a>
+        <a href="http://72.61.232.114:5678" target="_blank" class="px-3 py-1.5 rounded-lg bg-purple-50 text-purple-800 border-2 border-slate-900 flex items-center gap-1.5 hover:bg-purple-100 transition shadow-sm">
+          <span class="w-2 h-2 rounded-full bg-purple-500"></span>
+          n8n Auto :5678
+        </a>
+      </div>
+    </header>
+
+    <!-- Mode Navigation Tabs: Studio vs Bulk Factory -->
+    <div class="flex gap-3">
+      <button id="tabBtnStudio" onclick="switchMainTab('studio')" class="btn-brutal px-6 py-3 rounded-xl bg-slate-900 text-white font-black text-sm flex items-center gap-2">
+        <i data-lucide="sparkles" class="w-4 h-4 text-cyan-400"></i>
+        ⚡ Studio (Single Custom Video)
+      </button>
+      <button id="tabBtnFactory" onclick="switchMainTab('factory')" class="btn-brutal px-6 py-3 rounded-xl bg-white text-slate-900 hover:bg-blue-50 font-black text-sm flex items-center gap-2">
+        <i data-lucide="cpu" class="w-4 h-4 text-emerald-600"></i>
+        🏭 Bulk 100+ Video Factory (Autonomous Queue)
+      </button>
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- TAB 1: STUDIO (SINGLE VIDEO RENDER) -->
+    <!-- ============================================================== -->
+    <div id="studioTabView" class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+      <!-- Left Column: Controls (7 cols) -->
+      <div class="lg:col-span-7 space-y-6">
+
+        <!-- 1. Audio Mode Selection -->
+        <div class="studio-card p-5 space-y-4">
+          <label class="text-xs font-extrabold text-slate-900 uppercase tracking-wider flex items-center gap-2">
+            <i data-lucide="volume-2" class="w-4 h-4 text-blue-600"></i>
+            1. ऑडियो मोड चुनें (Audio Mode)
+          </label>
+          <div class="grid grid-cols-2 gap-3">
+            <button id="btnModeVoice" onclick="setMode('voice')" class="p-4 rounded-xl border-2 border-slate-900 bg-blue-50 text-left transition flex flex-col justify-between shadow-sm">
+              <div class="flex items-center justify-between">
+                <span class="text-2xl">🎙️</span>
+                <span id="badgeVoice" class="text-[10px] font-black bg-slate-900 text-white px-2 py-0.5 rounded border border-slate-900">ACTIVE</span>
+              </div>
+              <div class="mt-2 font-black text-sm text-slate-900">Voiceover Mode</div>
+              <div class="text-xs text-slate-600 font-semibold">नेचुरल AI आवाज़ + पिच व स्पीड कंट्रोल</div>
+            </button>
+
+            <button id="btnModeSilent" onclick="setMode('silent')" class="p-4 rounded-xl border-2 border-slate-300 bg-white hover:border-slate-900 text-left transition flex flex-col justify-between shadow-sm">
+              <div class="flex items-center justify-between">
+                <span class="text-2xl">🔇</span>
+                <span id="badgeSilent" class="hidden text-[10px] font-black bg-slate-900 text-white px-2 py-0.5 rounded border border-slate-900">ACTIVE</span>
+              </div>
+              <div class="mt-2 font-black text-sm text-slate-900">Silent Viral Mode</div>
+              <div class="text-xs text-slate-600 font-semibold">नो-वॉइस + बीट म्यूज़िक + SFX</div>
+            </button>
+          </div>
+        </div>
+
+        <!-- 2. Voice Tone & Pitch Lab -->
+        <div id="voiceStudioSection" class="studio-card p-5 space-y-4">
+          <div class="flex justify-between items-center">
+            <label class="text-xs font-extrabold text-slate-900 uppercase tracking-wider flex items-center gap-2">
+              <i data-lucide="mic" class="w-4 h-4 text-blue-600"></i>
+              2. वॉयस टोन व पिच लैब (Voice Tone & Pitch Controls)
+            </label>
+            <button onclick="previewAudio()" class="btn-brutal text-xs bg-slate-900 text-white px-3 py-1.5 rounded-lg flex items-center gap-1.5 font-bold">
+              <i data-lucide="play" class="w-3.5 h-3.5"></i>
+              Play Preview
+            </button>
+          </div>
+
+          <!-- Quick Tone Presets -->
+          <div>
+            <span class="text-[11px] font-bold text-slate-600 block mb-1.5">⚡ Quick Tone Presets (एक क्लिक में सेट करें):</span>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+              <button onclick="applyPreset('deep')" class="btn-brutal text-[11px] font-bold p-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-900 text-center">
+                💼 Deep Authority<br><span class="text-[9px] text-slate-500">-8Hz Pitch</span>
+              </button>
+              <button onclick="applyPreset('fast')" class="btn-brutal text-[11px] font-bold p-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-900 text-center">
+                🚀 Viral Energy<br><span class="text-[9px] text-slate-500">+14% Speed</span>
+              </button>
+              <button onclick="applyPreset('calm')" class="btn-brutal text-[11px] font-bold p-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-900 text-center">
+                👩‍⚕️ Calm Doctor<br><span class="text-[9px] text-slate-500">Smooth Swara</span>
+              </button>
+              <button onclick="applyPreset('reel')" class="btn-brutal text-[11px] font-bold p-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-900 text-center">
+                ⚡ Hyper Reel<br><span class="text-[9px] text-slate-500">+18% Fast</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Speaker Dropdown -->
+          <div>
+            <label class="text-xs text-slate-700 font-bold block mb-1">आवाज़ का चयन (Speaker):</label>
+            <select id="voiceSelect" class="studio-input w-full rounded-xl px-3 py-2 text-sm">
+              <option value="hi-IN-MadhurNeural">🇮🇳 Madhur (Energetic Hindi Male)</option>
+              <option value="hi-IN-SwaraNeural">🇮🇳 Swara (Corporate Hindi Female)</option>
+              <option value="en-IN-PrabhatNeural">🇮🇳 Prabhat (Indian English Male)</option>
+              <option value="en-US-ChristopherNeural">🇺🇸 Christopher (US Male Pro)</option>
+            </select>
+          </div>
+
+          <!-- Sliders: Speed & Pitch -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
+            <div class="p-3 rounded-xl border border-slate-300 bg-slate-50">
+              <div class="flex justify-between items-center mb-1">
+                <span class="text-xs font-bold text-slate-800">स्पीड (Speed Rate):</span>
+                <span id="speedValueLabel" class="text-xs font-black bg-slate-900 text-white px-2 py-0.5 rounded">+12%</span>
+              </div>
+              <input type="range" id="speedSlider" min="-20" max="30" value="12" step="2" oninput="updateSpeedLabel(this.value)" class="w-full slider-custom">
+              <div class="flex justify-between text-[10px] text-slate-500 mt-1 font-semibold">
+                <span>-20% Slow</span>
+                <span>0% Normal</span>
+                <span>+30% Fast</span>
+              </div>
+            </div>
+
+            <div class="p-3 rounded-xl border border-slate-300 bg-slate-50">
+              <div class="flex justify-between items-center mb-1">
+                <span class="text-xs font-bold text-slate-800">पिच / टोन (Pitch Tone):</span>
+                <span id="pitchValueLabel" class="text-xs font-black bg-slate-900 text-white px-2 py-0.5 rounded">+0Hz</span>
+              </div>
+              <input type="range" id="pitchSlider" min="-15" max="15" value="0" step="1" oninput="updatePitchLabel(this.value)" class="w-full slider-custom">
+              <div class="flex justify-between text-[10px] text-slate-500 mt-1 font-semibold">
+                <span>-15Hz (भारी/Deep)</span>
+                <span>0Hz</span>
+                <span>+15Hz (तेज़/High)</span>
+              </div>
+            </div>
+          </div>
+
+          <audio id="audioPreviewPlayer" class="w-full h-9 hidden mt-2" controls></audio>
+        </div>
+
+        <!-- 3. Visual Style Previews -->
+        <div class="studio-card p-5 space-y-4">
+          <div class="flex justify-between items-center">
+            <label class="text-xs font-extrabold text-slate-900 uppercase tracking-wider flex items-center gap-2">
+              <i data-lucide="palette" class="w-4 h-4 text-blue-600"></i>
+              3. विज़ुअल स्टाइल प्रीव्यू (Visual Style Previews)
+            </label>
+            <span class="text-[10px] font-black bg-emerald-100 text-emerald-900 px-2 py-0.5 rounded border border-slate-900">
+              HD NATIVE
+            </span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            
+            <!-- Style 1: Silent Kinetic -->
+            <label class="cursor-pointer block">
+              <input type="radio" name="videoStyle" value="silent_kinetic" checked class="hidden peer">
+              <div class="p-3 rounded-xl border-2 border-slate-300 bg-white peer-checked:border-slate-900 peer-checked:bg-blue-50/70 peer-checked:shadow-[3px_3px_0px_#0F172A] transition space-y-2">
+                <div class="w-full h-24 rounded-lg bg-slate-900 border border-slate-800 p-2 flex flex-col justify-between overflow-hidden relative">
+                  <div class="text-[8px] font-black bg-red-600 text-white px-1.5 py-0.5 rounded w-max">⚠️ STOP NOW</div>
+                  <div class="text-[11px] font-black text-white leading-tight">DON'T BUILD IN 2026...</div>
+                  <div class="text-[9px] font-black text-cyan-400">₹3,40,000 ▲ +310%</div>
+                </div>
+                <div>
+                  <div class="font-black text-xs text-slate-900 flex items-center justify-between">
+                    <span>⚡ Silent Kinetic</span>
+                    <span class="text-[9px] bg-slate-200 px-1 py-0.5 rounded font-bold">14s Reel</span>
+                  </div>
+                  <div class="text-[11px] text-slate-600 font-medium mt-0.5">बीट-सिंक टेक्स्ट + SFX + रेवेन्यू ओडोमीटर</div>
+                </div>
+              </div>
+            </label>
+
+            <!-- Style 2: Vismart Vector -->
+            <label class="cursor-pointer block">
+              <input type="radio" name="videoStyle" value="vismart" class="hidden peer">
+              <div class="p-3 rounded-xl border-2 border-slate-300 bg-white peer-checked:border-slate-900 peer-checked:bg-blue-50/70 peer-checked:shadow-[3px_3px_0px_#0F172A] transition space-y-2">
+                <div class="w-full h-24 rounded-lg bg-gradient-to-br from-indigo-900 to-slate-900 border border-slate-800 p-2 flex flex-col justify-between overflow-hidden relative">
+                  <div class="text-[8px] font-black bg-cyan-400 text-black px-1.5 py-0.5 rounded w-max">🎯 VISMART</div>
+                  <div class="text-[10px] font-black text-white leading-tight">5-Beat Problem & Solution</div>
+                  <div class="text-[9px] text-slate-300">Emotional Healthcare Story</div>
+                </div>
+                <div>
+                  <div class="font-black text-xs text-slate-900 flex items-center justify-between">
+                    <span>🎯 Vismart Vector</span>
+                    <span class="text-[9px] bg-slate-200 px-1 py-0.5 rounded font-bold">Story</span>
+                  </div>
+                  <div class="text-[11px] text-slate-600 font-medium mt-0.5">क्लीनिक प्रॉब्लम-सॉल्यूशन + वेक्टर आर्ट</div>
+                </div>
+              </div>
+            </label>
+
+            <!-- Style 3: 16:9 Long Explainer -->
+            <label class="cursor-pointer block">
+              <input type="radio" name="videoStyle" value="long_explainer" class="hidden peer">
+              <div class="p-3 rounded-xl border-2 border-slate-300 bg-white peer-checked:border-slate-900 peer-checked:bg-blue-50/70 peer-checked:shadow-[3px_3px_0px_#0F172A] transition space-y-2">
+                <div class="w-full h-24 rounded-lg bg-slate-100 border-2 border-slate-900 p-2 flex flex-col justify-between overflow-hidden relative">
+                  <div class="text-[8px] font-black bg-blue-600 text-white px-1.5 py-0.5 rounded w-max">📺 16:9 4K</div>
+                  <div class="text-[10px] font-black text-slate-900 leading-tight">CLINIC EXPANSION BLUEPRINT</div>
+                  <div class="text-[8px] text-emerald-700 font-bold">YouTube / Desktop Master</div>
+                </div>
+                <div>
+                  <div class="font-black text-xs text-slate-900 flex items-center justify-between">
+                    <span>📺 Long 16:9</span>
+                    <span class="text-[9px] bg-blue-100 text-blue-900 px-1 py-0.5 rounded font-bold">YouTube</span>
+                  </div>
+                  <div class="text-[11px] text-slate-600 font-medium mt-0.5">फुल-स्क्रीन लैंडस्केप डीप एक्सप्लेनर</div>
+                </div>
+              </div>
+            </label>
+
+          </div>
+        </div>
+
+        <!-- 4. Script & 1-Click Action -->
+        <div class="studio-card p-5 space-y-3">
+          <div class="flex justify-between items-center">
+            <label class="text-xs font-extrabold text-slate-900 uppercase tracking-wider flex items-center gap-2">
+              <i data-lucide="file-text" class="w-4 h-4 text-blue-600"></i>
+              4. स्क्रिप्ट / हुक टेक्स्ट
+            </label>
+            <div class="flex gap-2">
+              <button onclick="fillSample('dentist')" class="btn-brutal text-[11px] bg-slate-100 text-slate-900 font-bold px-2.5 py-1 rounded-lg hover:bg-slate-200">Dentist Sample</button>
+              <button onclick="fillSample('agency')" class="btn-brutal text-[11px] bg-slate-100 text-slate-900 font-bold px-2.5 py-1 rounded-lg hover:bg-slate-200">Website Sample</button>
+            </div>
+          </div>
+          <textarea id="scriptInput" rows="3" class="studio-input w-full rounded-xl p-3 text-sm placeholder-slate-400" placeholder="यहाँ अपनी स्क्रिप्ट या वीडियो का मुख्य हुक लिखें..."></textarea>
+
+          <!-- 1-Click Action Button -->
+          <button id="btnRender" onclick="startRender()" class="btn-brutal w-full py-4 rounded-xl bg-slate-900 text-white font-black text-base tracking-wide flex items-center justify-center gap-2 hover:bg-black transition">
+            <i data-lucide="video" class="w-5 h-5 text-cyan-400"></i>
+            1-CLICK RENDER VIDEO
+          </button>
+          <div id="renderStatus" class="text-xs text-center font-bold text-slate-700 bg-slate-100 p-2 rounded-lg border border-slate-300 hidden"></div>
+        </div>
+
+      </div>
+
+      <!-- Right Column: Multi-Track Scheduler & Video Gallery (5 cols) -->
+      <div class="lg:col-span-5 space-y-6">
+
+        <!-- Multi-Track Automation Scheduler -->
+        <div class="studio-card p-5 space-y-4">
+          <div class="flex justify-between items-center">
+            <h3 class="text-xs font-extrabold text-slate-900 uppercase tracking-wider flex items-center gap-2">
+              <i data-lucide="clock" class="w-4 h-4 text-emerald-600"></i>
+              मल्टी-ट्रैक ऑटो-पायलट शेड्यूलर
+            </h3>
+            <span class="text-[10px] font-black px-2 py-0.5 rounded bg-emerald-100 text-emerald-900 border border-slate-900">
+              VPS CRON ACTIVE
+            </span>
+          </div>
+
+          <!-- Slot 1: Morning Reel -->
+          <div class="p-3 rounded-xl border-2 border-slate-900 bg-slate-50 space-y-2">
+            <div class="flex justify-between items-center">
+              <span class="text-xs font-black text-slate-900">🌅 स्लॉट 1: मॉर्निंग वायरल रील</span>
+              <label class="flex items-center gap-1.5 text-xs font-bold cursor-pointer">
+                <input type="checkbox" id="slot1_active" checked class="w-4 h-4 rounded"> Active
+              </label>
+            </div>
+            <div class="grid grid-cols-2 gap-2 text-xs">
+              <div>
+                <span class="text-[10px] text-slate-500 font-bold block">समय:</span>
+                <input type="time" id="slot1_time" value="10:00" class="studio-input w-full rounded-lg px-2 py-1 text-xs">
+              </div>
+              <div>
+                <span class="text-[10px] text-slate-500 font-bold block">स्टाइल:</span>
+                <select id="slot1_style" class="studio-input w-full rounded-lg px-2 py-1 text-xs">
+                  <option value="silent_kinetic" selected>Silent Kinetic (Beats)</option>
+                  <option value="vismart">Vismart Vector</option>
+                  <option value="long_explainer">16:9 Long Video</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slot 2: Evening Story -->
+          <div class="p-3 rounded-xl border-2 border-slate-900 bg-slate-50 space-y-2">
+            <div class="flex justify-between items-center">
+              <span class="text-xs font-black text-slate-900">🌆 स्लॉट 2: इवनिंग स्टोरी / लॉन्ग</span>
+              <label class="flex items-center gap-1.5 text-xs font-bold cursor-pointer">
+                <input type="checkbox" id="slot2_active" checked class="w-4 h-4 rounded"> Active
+              </label>
+            </div>
+            <div class="grid grid-cols-2 gap-2 text-xs">
+              <div>
+                <span class="text-[10px] text-slate-500 font-bold block">समय:</span>
+                <input type="time" id="slot2_time" value="18:00" class="studio-input w-full rounded-lg px-2 py-1 text-xs">
+              </div>
+              <div>
+                <span class="text-[10px] text-slate-500 font-bold block">स्टाइल:</span>
+                <select id="slot2_style" class="studio-input w-full rounded-lg px-2 py-1 text-xs">
+                  <option value="long_explainer" selected>16:9 Long Explainer</option>
+                  <option value="vismart">Vismart Vector</option>
+                  <option value="silent_kinetic">Silent Kinetic</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <button onclick="saveMultiSchedules()" class="btn-brutal w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs rounded-xl transition flex items-center justify-center gap-2">
+            <i data-lucide="save" class="w-4 h-4"></i>
+            SAVE ALL SCHEDULES
+          </button>
+        </div>
+
+        <!-- Video Gallery & Download -->
+        <div class="studio-card p-5 space-y-4">
+          <div class="flex justify-between items-center">
+            <h3 class="text-xs font-extrabold text-slate-900 uppercase tracking-wider flex items-center gap-2">
+              <i data-lucide="film" class="w-4 h-4 text-blue-600"></i>
+              तैयार वीडियो लाइब्रेरी
+            </h3>
+            <button onclick="fetchVideos()" class="text-xs text-blue-600 font-bold hover:underline flex items-center gap-1">
+              <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> Refresh
+            </button>
+          </div>
+
+          <!-- Category Filter Pills -->
+          <div class="flex gap-1.5 text-[11px] font-bold">
+            <button onclick="filterCategory('all')" id="cat_all" class="px-2.5 py-1 rounded-lg bg-slate-900 text-white border border-slate-900">All</button>
+            <button onclick="filterCategory('reel')" id="cat_reel" class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-800 border border-slate-300">📱 Reels</button>
+            <button onclick="filterCategory('long')" id="cat_long" class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-800 border border-slate-300">📺 Long 16:9</button>
+            <button onclick="filterCategory('story')" id="cat_story" class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-800 border border-slate-300">⚡ Stories</button>
+          </div>
+
+          <div id="videoListContainer" class="space-y-3 max-h-[440px] overflow-y-auto pr-1">
+            <div class="text-xs text-slate-500 font-semibold text-center py-8">लोड हो रहा है...</div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- TAB 2: BULK 100+ VIDEO FACTORY (AUTONOMOUS QUEUE) -->
+    <!-- ============================================================== -->
+    <div id="factoryTabView" class="hidden space-y-6">
+
+      <!-- Top Factory Stats Odometer -->
+      <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
+        <div class="studio-card p-4 flex flex-col justify-between">
+          <span class="text-xs font-bold text-slate-600 uppercase">कुल कतार (Total Queue)</span>
+          <div id="statTotal" class="text-3xl font-black text-slate-900 mt-1">0</div>
+          <span class="text-[10px] text-slate-500 font-bold mt-1">Jobs submitted</span>
+        </div>
+        <div class="studio-card p-4 flex flex-col justify-between">
+          <span class="text-xs font-bold text-emerald-700 uppercase">तैयार वीडियो (Completed)</span>
+          <div id="statCompleted" class="text-3xl font-black text-emerald-600 mt-1">0</div>
+          <span id="statPercent" class="text-[10px] text-emerald-700 font-extrabold mt-1">0% Complete</span>
+        </div>
+        <div class="studio-card p-4 flex flex-col justify-between">
+          <span class="text-xs font-bold text-blue-700 uppercase">प्रगति में (Active/Pending)</span>
+          <div id="statPending" class="text-3xl font-black text-blue-600 mt-1">0</div>
+          <span id="statStatusLabel" class="text-[10px] text-blue-700 font-bold mt-1">Worker Resting</span>
+        </div>
+        <div class="studio-card p-4 flex flex-col justify-between">
+          <span class="text-xs font-bold text-slate-600 uppercase">फॉर्मेट ब्रेकडाउन</span>
+          <div class="text-xs font-black text-slate-900 mt-1 space-y-0.5">
+            <div id="statReelsCount">📱 0 Reels</div>
+            <div id="statLongCount">📺 0 Long 16:9</div>
+            <div id="statStoriesCount">⚡ 0 Stories</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Factory Control Panel & Input -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+        <!-- Left Feeder (7 cols) -->
+        <div class="lg:col-span-7 space-y-6">
+
+          <div class="studio-card p-5 space-y-4">
+            <div class="flex justify-between items-center">
+              <h3 class="text-sm font-black text-slate-900 uppercase tracking-wider flex items-center gap-2">
+                <i data-lucide="layers" class="w-4 h-4 text-emerald-600"></i>
+                1. बल्क टॉपिक फीडर (Mass Topic Feeder)
+              </h3>
+              <div class="flex gap-1.5">
+                <button onclick="loadPresetTopics('dental')" class="btn-brutal text-[10px] font-bold px-2 py-1 bg-slate-100 rounded hover:bg-slate-200">
+                  +10 Dental
+                </button>
+                <button onclick="loadPresetTopics('agency')" class="btn-brutal text-[10px] font-bold px-2 py-1 bg-slate-100 rounded hover:bg-slate-200">
+                  +10 Agency
+                </button>
+              </div>
+            </div>
+
+            <p class="text-xs text-slate-600 font-medium">
+              यहाँ 10, 50, या 100 टॉपिक्स एक साथ पेस्ट करें (हर लाइन में 1 टॉपिक या हुक):
+            </p>
+
+            <textarea id="bulkTopicsInput" rows="7" class="studio-input w-full rounded-xl p-3 text-sm font-semibold placeholder-slate-400" placeholder="1. Top 5 Dental Clinic Secrets
+2. How to Book 50+ Patients Online
+3. Why 90% of Local Websites Fail
+4. Transform Your Business with Apple-Grade UI..."></textarea>
+
+            <!-- Multi-Format Matrix Checkboxes -->
+            <div>
+              <span class="text-xs font-extrabold text-slate-900 block mb-2">2. फॉर्मेट मैट्रिक्स चुनें (Choose Output Formats for Each Topic):</span>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <label class="p-3 rounded-xl border-2 border-slate-900 bg-slate-50 flex items-center gap-3 cursor-pointer">
+                  <input type="checkbox" id="fmtReel" checked class="w-4 h-4 accent-slate-900">
+                  <div>
+                    <div class="text-xs font-black text-slate-900">📱 9:16 Vertical Reel</div>
+                    <div class="text-[10px] text-slate-500 font-semibold">Instagram & Shorts</div>
+                  </div>
+                </label>
+
+                <label class="p-3 rounded-xl border-2 border-slate-900 bg-slate-50 flex items-center gap-3 cursor-pointer">
+                  <input type="checkbox" id="fmtLong" checked class="w-4 h-4 accent-slate-900">
+                  <div>
+                    <div class="text-xs font-black text-slate-900">📺 16:9 Long Video</div>
+                    <div class="text-[10px] text-slate-500 font-semibold">YouTube & Web</div>
+                  </div>
+                </label>
+
+                <label class="p-3 rounded-xl border-2 border-slate-900 bg-slate-50 flex items-center gap-3 cursor-pointer">
+                  <input type="checkbox" id="fmtStory" class="w-4 h-4 accent-slate-900">
+                  <div>
+                    <div class="text-xs font-black text-slate-900">⚡ 9:16 Story / Status</div>
+                    <div class="text-[10px] text-slate-500 font-semibold">Daily Micro-Clips</div>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <!-- Action: Launch Batch Factory -->
+            <button onclick="submitBatchFactory()" class="btn-brutal w-full py-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-black text-base flex items-center justify-center gap-2 shadow-lg transition">
+              <i data-lucide="play-circle" class="w-6 h-6"></i>
+              LAUNCH 100+ BATCH PRODUCTION FACTORY
+            </button>
+          </div>
+
+        </div>
+
+        <!-- Right Queue Monitor (5 cols) -->
+        <div class="lg:col-span-5 space-y-6">
+
+          <div class="studio-card p-5 space-y-4">
+            <div class="flex justify-between items-center">
+              <h3 class="text-sm font-black text-slate-900 uppercase tracking-wider flex items-center gap-2">
+                <i data-lucide="activity" class="w-4 h-4 text-blue-600"></i>
+                लाइव प्रोडक्शन कतार (Live Queue)
+              </h3>
+              <div class="flex gap-1.5">
+                <button onclick="pauseBatchWorker()" class="btn-brutal text-[10px] font-bold px-2 py-1 bg-amber-100 text-amber-900 rounded">
+                  Pause
+                </button>
+                <button onclick="startBatchWorker()" class="btn-brutal text-[10px] font-bold px-2 py-1 bg-emerald-100 text-emerald-900 rounded">
+                  Resume
+                </button>
+                <button onclick="clearBatchQueue()" class="btn-brutal text-[10px] font-bold px-2 py-1 bg-red-100 text-red-900 rounded">
+                  Clear
+                </button>
+              </div>
+            </div>
+
+            <!-- Progress Bar -->
+            <div>
+              <div class="flex justify-between text-xs font-black mb-1">
+                <span id="queueProgressLabel">0 / 0 Done</span>
+                <span id="queueProgressPercent">0%</span>
+              </div>
+              <div class="w-full h-3 bg-slate-200 rounded-full overflow-hidden border border-slate-900">
+                <div id="queueProgressBar" class="h-full bg-emerald-600 transition-all duration-500" style="width: 0%"></div>
+              </div>
+            </div>
+
+            <!-- Active Processing Job Banner -->
+            <div id="activeJobBox" class="p-3 rounded-xl border-2 border-blue-900 bg-blue-50 space-y-1">
+              <div class="text-[10px] font-black text-blue-800 flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-blue-600 animate-ping"></span>
+                CURRENTLY RENDERING
+              </div>
+              <div id="activeJobTitle" class="text-xs font-black text-slate-900 truncate">No active rendering job</div>
+            </div>
+
+            <!-- Recent Jobs List -->
+            <div class="space-y-2 max-h-[380px] overflow-y-auto pr-1" id="batchJobsList">
+              <div class="text-xs text-slate-500 text-center py-6 font-semibold">कतार खाली है</div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Video Modal -->
+  <div id="videoModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm hidden items-center justify-center p-4 z-50" onclick="closeModal()">
+    <div class="studio-card max-w-sm w-full p-4 relative" onclick="event.stopPropagation()">
+      <button onclick="closeModal()" class="absolute top-3 right-3 text-slate-500 hover:text-slate-900 font-black text-lg">✕</button>
+      <video id="modalVideo" controls class="w-full rounded-xl aspect-[9/16] bg-black mb-3 border-2 border-slate-900"></video>
+      <div id="modalTitle" class="text-sm font-black text-slate-900 truncate mb-2"></div>
+      <a id="modalDownload" href="#" download class="btn-brutal block text-center w-full py-2.5 rounded-xl bg-slate-900 text-white font-black text-xs">
+        Download MP4
+      </a>
+    </div>
+  </div>
+
+  <!-- Client-side Logic -->
+  <script>
+    let currentMode = 'voice';
+    let allVideos = [];
+    let activeFilter = 'all';
+
+    function switchMainTab(tab) {
+      const btnStudio = document.getElementById('tabBtnStudio');
+      const btnFactory = document.getElementById('tabBtnFactory');
+      const viewStudio = document.getElementById('studioTabView');
+      const viewFactory = document.getElementById('factoryTabView');
+
+      if (tab === 'studio') {
+        btnStudio.className = "btn-brutal px-6 py-3 rounded-xl bg-slate-900 text-white font-black text-sm flex items-center gap-2";
+        btnFactory.className = "btn-brutal px-6 py-3 rounded-xl bg-white text-slate-900 hover:bg-blue-50 font-black text-sm flex items-center gap-2";
+        viewStudio.classList.remove('hidden');
+        viewFactory.classList.add('hidden');
+      } else {
+        btnFactory.className = "btn-brutal px-6 py-3 rounded-xl bg-slate-900 text-white font-black text-sm flex items-center gap-2";
+        btnStudio.className = "btn-brutal px-6 py-3 rounded-xl bg-white text-slate-900 hover:bg-blue-50 font-black text-sm flex items-center gap-2";
+        viewFactory.classList.remove('hidden');
+        viewStudio.classList.add('hidden');
+        pollBatchStatus();
+      }
+    }
+
+    function setMode(mode) {
+      currentMode = mode;
+      const btnVoice = document.getElementById('btnModeVoice');
+      const btnSilent = document.getElementById('btnModeSilent');
+      const badgeVoice = document.getElementById('badgeVoice');
+      const badgeSilent = document.getElementById('badgeSilent');
+      const voiceStudio = document.getElementById('voiceStudioSection');
+
+      if (mode === 'voice') {
+        btnVoice.className = "p-4 rounded-xl border-2 border-slate-900 bg-blue-50 text-left transition flex flex-col justify-between shadow-sm";
+        btnSilent.className = "p-4 rounded-xl border-2 border-slate-300 bg-white hover:border-slate-900 text-left transition flex flex-col justify-between shadow-sm";
+        badgeVoice.classList.remove('hidden');
+        badgeSilent.classList.add('hidden');
+        voiceStudio.classList.remove('hidden');
+      } else {
+        btnSilent.className = "p-4 rounded-xl border-2 border-slate-900 bg-blue-50 text-left transition flex flex-col justify-between shadow-sm";
+        btnVoice.className = "p-4 rounded-xl border-2 border-slate-300 bg-white hover:border-slate-900 text-left transition flex flex-col justify-between shadow-sm";
+        badgeSilent.classList.remove('hidden');
+        badgeVoice.classList.add('hidden');
+        voiceStudio.classList.add('hidden');
+        document.querySelector('input[name="videoStyle"][value="silent_kinetic"]').checked = true;
+      }
+    }
+
+    function updateSpeedLabel(val) {
+      const sign = val >= 0 ? '+' : '';
+      document.getElementById('speedValueLabel').innerText = `${sign}${val}%`;
+    }
+
+    function updatePitchLabel(val) {
+      const sign = val >= 0 ? '+' : '';
+      document.getElementById('pitchValueLabel').innerText = `${sign}${val}Hz`;
+    }
+
+    function applyPreset(preset) {
+      const voice = document.getElementById('voiceSelect');
+      const speedSlider = document.getElementById('speedSlider');
+      const pitchSlider = document.getElementById('pitchSlider');
+
+      if (preset === 'deep') {
+        voice.value = 'hi-IN-MadhurNeural';
+        speedSlider.value = 6;
+        pitchSlider.value = -8;
+      } else if (preset === 'fast') {
+        voice.value = 'hi-IN-MadhurNeural';
+        speedSlider.value = 14;
+        pitchSlider.value = 2;
+      } else if (preset === 'calm') {
+        voice.value = 'hi-IN-SwaraNeural';
+        speedSlider.value = 2;
+        pitchSlider.value = -2;
+      } else if (preset === 'reel') {
+        voice.value = 'hi-IN-MadhurNeural';
+        speedSlider.value = 18;
+        pitchSlider.value = 4;
+      }
+
+      updateSpeedLabel(speedSlider.value);
+      updatePitchLabel(pitchSlider.value);
+      previewAudio();
+    }
+
+    function fillSample(type) {
+      if (type === 'dentist') {
+        document.getElementById('scriptInput').value = "DON'T BUILD A CLINIC WEBSITE IN 2026 UNTIL YOU SEE THIS... Modern AI websites get 50+ booked patients daily!";
+      } else {
+        document.getElementById('scriptInput').value = "क्या आप अपने बिज़नेस के लिए एक प्रोफेशनल Apple-Grade वेबसाइट बनवाना चाहते हैं? अभी WhatsApp करें Vismart Studio को!";
+      }
+    }
+
+    function loadPresetTopics(niche) {
+      const input = document.getElementById('bulkTopicsInput');
+      if (niche === 'dental') {
+        input.value = [
+          "Don't build a dental clinic website in 2026 without WhatsApp automated booking",
+          "How Dr. Sharma doubled root-canal appointments in 30 days",
+          "The ₹2 Lakh mistake 85% of healthcare clinics make online",
+          "Why slow 8-second websites destroy patient trust instantly",
+          "Apple-Grade design vs ₹5,000 cheap templates for doctors",
+          "Automate your clinic receptionist with a 1-click booking portal",
+          "The secret to ranking #1 on Google Maps for local dental search",
+          "How instant token payment stops 70% of patient no-shows",
+          "Case Study: 54 new patient inquiries in 14 days",
+          "Get your modern clinic website ready in 48 hours"
+        ].join('\n');
+      } else {
+        input.value = [
+          "Why your business website isn't getting any leads in 2026",
+          "The 3-second rule: Why visitors leave your old website",
+          "How to convert casual Instagram scrollers into paying clients",
+          "The architecture of a high-conversion agency landing page",
+          "Zero-friction WhatsApp closing funnels explained",
+          "Why modern businesses are upgrading from WordPress to Apple UI",
+          "Stop losing leads to competitors with faster mobile sites",
+          "The exact pricing calculator that increased revenue by 40%",
+          "Launch your high-ticket website with Vismart Studio",
+          "How we build websites that close clients 24/7 on autopilot"
+        ].join('\n');
+      }
+    }
+
+    async function submitBatchFactory() {
+      const raw = document.getElementById('bulkTopicsInput').value.trim();
+      if (!raw) {
+        alert("कृपया कम से कम 1 या अधिक टॉपिक्स डालें!");
+        return;
+      }
+      const lines = raw.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+
+      const formats = [];
+      if (document.getElementById('fmtReel').checked) formats.push('reel');
+      if (document.getElementById('fmtLong').checked) formats.push('long');
+      if (document.getElementById('fmtStory').checked) formats.push('story');
+
+      if (formats.length === 0) {
+        alert("कम से कम 1 फॉर्मेट चुनें (Reel, Long, या Story)!");
+        return;
+      }
+
+      try {
+        const res = await fetch('/api/batch/submit', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+            topics: lines,
+            formats: formats,
+            style: 'silent_kinetic',
+            mode: 'silent',
+            auto_start: true
+          })
+        });
+        const data = await res.json();
+        alert(`🎉 ${data.added_jobs} नए वीडियो कतार (Queue) में जुड़ गए हैं और रेंडरिंग शुरू हो गई है!`);
+        pollBatchStatus();
+      } catch (e) {
+        alert("त्रुटि: " + e.message);
+      }
+    }
+
+    async function pollBatchStatus() {
+      try {
+        const res = await fetch('/api/batch/status');
+        const data = await res.json();
+
+        document.getElementById('statTotal').innerText = data.total;
+        document.getElementById('statCompleted').innerText = data.completed;
+        document.getElementById('statPending').innerText = data.pending + data.processing;
+        document.getElementById('statPercent').innerText = `${data.percent}% Complete`;
+        document.getElementById('queueProgressPercent').innerText = `${data.percent}%`;
+        document.getElementById('queueProgressLabel').innerText = `${data.completed} / ${data.total} Done`;
+        document.getElementById('queueProgressBar').style.width = `${data.percent}%`;
+
+        document.getElementById('statReelsCount').innerText = `📱 ${data.counts.reels} Reels`;
+        document.getElementById('statLongCount').innerText = `📺 ${data.counts.long} Long 16:9`;
+        document.getElementById('statStoriesCount').innerText = `⚡ ${data.counts.stories} Stories`;
+
+        if (data.is_running) {
+          document.getElementById('statStatusLabel').innerText = "🟢 Active Rendering";
+          if (data.current_job) {
+            document.getElementById('activeJobTitle').innerText = `#${data.current_job.id}: ${data.current_job.topic} (${data.current_job.format.toUpperCase()})`;
+          } else {
+            document.getElementById('activeJobTitle').innerText = "Preparing next job in queue...";
+          }
+        } else {
+          document.getElementById('statStatusLabel').innerText = "⏸️ Worker Paused / Idle";
+          document.getElementById('activeJobTitle').innerText = "Worker Resting (No active render)";
+        }
+
+        // Render queue jobs list
+        const jobsContainer = document.getElementById('batchJobsList');
+        if (data.jobs && data.jobs.length > 0) {
+          jobsContainer.innerHTML = data.jobs.slice().reverse().map(j => {
+            let badgeClass = "bg-amber-100 text-amber-900 border-amber-300";
+            if (j.status === 'completed') badgeClass = "bg-emerald-100 text-emerald-900 border-emerald-400";
+            if (j.status === 'failed') badgeClass = "bg-red-100 text-red-900 border-red-300";
+            if (j.status === 'processing') badgeClass = "bg-blue-100 text-blue-900 border-blue-400 animate-pulse";
+
+            return `
+              <div class="p-2.5 rounded-lg border-2 border-slate-900 bg-white flex items-center justify-between gap-2 shadow-[2px_2px_0px_#0F172A]">
+                <div class="truncate">
+                  <div class="text-xs font-black text-slate-900 truncate">${j.topic}</div>
+                  <div class="text-[10px] text-slate-500 font-bold">${j.format.toUpperCase()} • ${j.style}</div>
+                </div>
+                <span class="text-[9px] font-black px-2 py-0.5 rounded border ${badgeClass}">
+                  ${j.status.toUpperCase()}
+                </span>
+              </div>
+            `;
+          }).join('');
+        }
+      } catch (e) {}
+    }
+
+    async function startBatchWorker() {
+      await fetch('/api/batch/start', {method: 'POST'});
+      pollBatchStatus();
+    }
+
+    async function pauseBatchWorker() {
+      await fetch('/api/batch/pause', {method: 'POST'});
+      pollBatchStatus();
+    }
+
+    async function clearBatchQueue() {
+      if (confirm("क्या आप पूरी कतार साफ़ करना चाहते हैं?")) {
+        await fetch('/api/batch/clear', {method: 'POST'});
+        pollBatchStatus();
+      }
+    }
+
+    async function previewAudio() {
+      const text = document.getElementById('scriptInput').value.trim() || "नमस्ते, यह Vismart AI स्टूडियो की आवाज़ का टेस्ट है।";
+      const voice = document.getElementById('voiceSelect').value;
+      const speedVal = document.getElementById('speedSlider').value;
+      const pitchVal = document.getElementById('pitchSlider').value;
+      const rate = (speedVal >= 0 ? '+' : '') + speedVal + '%';
+      const pitch = (pitchVal >= 0 ? '+' : '') + pitchVal + 'Hz';
+      const player = document.getElementById('audioPreviewPlayer');
+
+      player.classList.remove('hidden');
+      player.src = `/api/preview-voice?text=${encodeURIComponent(text)}&voice=${voice}&rate=${rate}&pitch=${pitch}`;
+      player.play();
+    }
+
+    async function startRender() {
+      const btn = document.getElementById('btnRender');
+      const statusDiv = document.getElementById('renderStatus');
+      const style = document.querySelector('input[name="videoStyle"]:checked').value;
+      const text = document.getElementById('scriptInput').value.trim();
+      const voice = document.getElementById('voiceSelect').value;
+      const speedVal = document.getElementById('speedSlider').value;
+      const pitchVal = document.getElementById('pitchSlider').value;
+      const rate = (speedVal >= 0 ? '+' : '') + speedVal + '%';
+      const pitch = (pitchVal >= 0 ? '+' : '') + pitchVal + 'Hz';
+
+      btn.disabled = true;
+      btn.innerHTML = `<span class="inline-block animate-spin mr-2">⏳</span> रेंडरिंग शुरू हो रही है...`;
+      statusDiv.classList.remove('hidden');
+      statusDiv.innerText = "Remotion इंजन चालू हो रहा है (10-30 सेकंड प्रतीक्षा करें)...";
+
+      try {
+        const res = await fetch('/api/render', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+            mode: currentMode,
+            style: style,
+            text: text,
+            voice: voice,
+            rate: rate,
+            pitch: pitch
+          })
+        });
+        pollStatus();
+      } catch (e) {
+        statusDiv.innerText = "त्रुटि: " + e.message;
+        btn.disabled = false;
+        btn.innerHTML = `<i data-lucide="video" class="w-5 h-5 text-cyan-400"></i> 1-CLICK RENDER VIDEO`;
+        lucide.createIcons();
+      }
+    }
+
+    async function pollStatus() {
+      const statusDiv = document.getElementById('renderStatus');
+      const btn = document.getElementById('btnRender');
+
+      const interval = setInterval(async () => {
+        try {
+          const res = await fetch('/api/status');
+          const data = await res.json();
+          if (data.is_rendering) {
+            statusDiv.innerText = "रेंडर प्रगति में है: " + data.last_status;
+          } else {
+            clearInterval(interval);
+            btn.disabled = false;
+            btn.innerHTML = `<i data-lucide="video" class="w-5 h-5 text-cyan-400"></i> 1-CLICK RENDER VIDEO`;
+            lucide.createIcons();
+            if (data.last_error) {
+              statusDiv.innerText = "❌ रेंडर विफल: " + data.last_error;
+            } else {
+              statusDiv.innerText = "🎉 वीडियो सफलतापूर्वक तैयार हो गया: " + data.last_video;
+              fetchVideos();
+            }
+          }
+        } catch (e) {
+          clearInterval(interval);
+        }
+      }, 3000);
+    }
+
+    async function fetchVideos() {
+      try {
+        const res = await fetch('/api/videos');
+        const data = await res.json();
+        allVideos = data.videos || [];
+        renderVideoCards();
+      } catch (e) {}
+    }
+
+    function filterCategory(cat) {
+      activeFilter = cat;
+      ['all', 'reel', 'long', 'story'].forEach(c => {
+        const el = document.getElementById(`cat_${c}`);
+        if (el) {
+          if (c === cat) {
+            el.className = "px-2.5 py-1 rounded-lg bg-slate-900 text-white border border-slate-900";
+          } else {
+            el.className = "px-2.5 py-1 rounded-lg bg-slate-100 text-slate-800 border border-slate-300";
+          }
+        }
+      });
+      renderVideoCards();
+    }
+
+    function renderVideoCards() {
+      const container = document.getElementById('videoListContainer');
+      const filtered = activeFilter === 'all' 
+        ? allVideos 
+        : allVideos.filter(v => v.category === activeFilter);
+
+      if (filtered.length === 0) {
+        container.innerHTML = '<div class="text-xs text-slate-500 font-semibold text-center py-6">इस कैटेगरी में कोई वीडियो नहीं मिला</div>';
+        return;
+      }
+
+      container.innerHTML = filtered.map(v => `
+        <div class="p-3 rounded-xl bg-white border-2 border-slate-900 flex items-center justify-between gap-3 shadow-[2px_2px_0px_#0F172A] hover:shadow-[4px_4px_0px_#0F172A] transition">
+          <div class="flex items-center gap-3 truncate cursor-pointer" onclick="openModal('${v.url}', '${v.filename}')">
+            <div class="w-12 h-14 rounded-lg bg-slate-900 flex-shrink-0 overflow-hidden relative border-2 border-slate-900 flex items-center justify-center">
+              ${v.cover_url ? `<img src="${v.cover_url}" class="w-full h-full object-cover">` : `<span class="text-xs text-white">🎬</span>`}
+              <span class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 hover:opacity-100 transition text-white text-xs">▶</span>
+            </div>
+            <div class="truncate">
+              <div class="text-xs font-black text-slate-900 truncate">${v.filename}</div>
+              <div class="text-[10px] text-slate-600 font-bold">${v.size_mb} MB • ${v.category.toUpperCase()}</div>
+            </div>
+          </div>
+          <div class="flex items-center gap-1.5 flex-shrink-0">
+            <button onclick="openModal('${v.url}', '${v.filename}')" class="btn-brutal p-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-900 text-xs font-bold">
+              ▶ Play
+            </button>
+            <a href="${v.url}" download class="btn-brutal p-2 rounded-lg bg-slate-900 text-white hover:bg-black text-xs font-bold">
+              ⬇
+            </a>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function openModal(url, title) {
+      const modal = document.getElementById('videoModal');
+      const vid = document.getElementById('modalVideo');
+      document.getElementById('modalTitle').innerText = title;
+      document.getElementById('modalDownload').href = url;
+      vid.src = url;
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      vid.play();
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('videoModal');
+      const vid = document.getElementById('modalVideo');
+      vid.pause();
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    async function saveMultiSchedules() {
+      const slots = [
+        {
+          id: 'morning',
+          label: '🌅 Slot 1: Morning Viral Reel',
+          active: document.getElementById('slot1_active').checked,
+          time_str: document.getElementById('slot1_time').value,
+          style: document.getElementById('slot1_style').value,
+          mode: 'silent',
+          prompt: 'Morning Dental Clinic Video'
+        },
+        {
+          id: 'evening',
+          label: '🌆 Slot 2: Evening Explainer Story',
+          active: document.getElementById('slot2_active').checked,
+          time_str: document.getElementById('slot2_time').value,
+          style: document.getElementById('slot2_style').value,
+          mode: 'voice',
+          prompt: 'Evening Long Landscape Explainer'
+        }
+      ];
+
+      try {
+        await fetch('/api/schedules', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({slots})
+        });
+        alert("✅ दोनों ऑटो-पायलट स्लॉट्स सुरक्षित सेव हो गए!");
+      } catch (e) {
+        alert("त्रुटि: " + e.message);
+      }
+    }
+
+    // Initialize
+    window.onload = () => {
+      lucide.createIcons();
+      fetchVideos();
+      setInterval(pollBatchStatus, 4000);
+    };
+  </script>
+</body>
+</html>

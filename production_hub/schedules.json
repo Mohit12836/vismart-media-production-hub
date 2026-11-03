@@ -1,0 +1,20 @@
+[
+  {
+    "id": "morning",
+    "label": "\ud83c\udf05 Slot 1: Morning Viral Reel",
+    "active": true,
+    "time_str": "10:00",
+    "style": "silent_kinetic",
+    "mode": "silent",
+    "prompt": "Top 3 Dental Clinic Marketing Hacks in 2026"
+  },
+  {
+    "id": "evening",
+    "label": "\ud83c\udf06 Slot 2: Evening Explainer Story",
+    "active": true,
+    "time_str": "18:00",
+    "style": "vismart",
+    "mode": "voice",
+    "prompt": "Why modern clinics lose \u20b92 Lakhs without an Apple-grade booking website"
+  }
+]

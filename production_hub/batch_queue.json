@@ -1,0 +1,21 @@
+{
+  "is_running": false,
+  "current_job_id": null,
+  "jobs": [
+    {
+      "id": "bd5fc1cf",
+      "topic": "Top Dental Clinic Marketing Secrets 2026",
+      "format": "reel",
+      "style": "silent_kinetic",
+      "mode": "silent",
+      "voice": "hi-IN-MadhurNeural",
+      "rate": "+12%",
+      "pitch": "+0Hz",
+      "status": "completed",
+      "output_file": null,
+      "created_at": "2026-11-03 13:48:05",
+      "finished_at": null,
+      "error": null
+    }
+  ]
+}

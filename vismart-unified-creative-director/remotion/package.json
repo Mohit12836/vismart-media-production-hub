@@ -1,0 +1,21 @@
+{
+  "name": "vismart-unified-remotion-baseline",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "render:demo": "remotion render src/index.tsx Demo out/demo.mp4 --codec h264",
+    "still:demo": "remotion still src/index.tsx Demo out/cover.png --frame 20"
+  },
+  "dependencies": {
+    "@remotion/cli": "^4.0.381",
+    "remotion": "^4.0.381",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "@remotion/google-fonts": "^4.0.381"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0"
+  }
+}

@@ -1,0 +1,2 @@
+# Honest 2D renderer baseline
+`npm install && npm run render:demo` renders the scene-plan with four self-generated vector scenes; uses NO paid visual APIs or external footage. Scene motion is deterministic; content currently has **no narration audio** because no licensed voice/recording was supplied. It demonstrates visual execution, not production-complete voice/word sync, scene generator or real 3D. An optional real narration/audio integration should be implemented and QA'd before distribution.

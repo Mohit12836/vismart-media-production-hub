@@ -1,0 +1,156 @@
+{
+  "meta": {
+    "title": "Professional Business Website — Vismart Studio",
+    "fps": 30,
+    "width": 720,
+    "height": 1280,
+    "language": "hi",
+    "duration": 76.4,
+    "audio_file": "audio/voiceover.mp3",
+    "visual_cost_policy": "zero-paid",
+    "word_alignment": "verified",
+    "genre": "local-business-ad"
+  },
+  "beats": [
+    {
+      "id": "b01",
+      "start": 0.0,
+      "end": 5.0,
+      "voice": "क्या आपके ग्राहक आपकी दुकान तक पहुंचने से पहले ही किसी दूसरे बिजनेस के पास चले जाते हैं?",
+      "emotion": {
+        "primary": "concern",
+        "secondary": "curiosity",
+        "intensity": 0.6,
+        "confidence": "human-verified"
+      },
+      "viewer_goal": "समस्या पहचानें",
+      "visual": "दुकान और ग्राहक का मोड़ - ग्राहक दूसरे दुकान की तरफ जाते हुए",
+      "shot": "wide overview with directional flow",
+      "motion": "slow-push",
+      "caption": "ग्राहक दूसरे के पास?",
+      "audio": "audio/voiceover.mp3",
+      "asset_strategy": "original-svg",
+      "evidence": "illustrative customer detour"
+    },
+    {
+      "id": "b02",
+      "start": 5.0,
+      "end": 15.0,
+      "voice": "आज ग्राहक आपकी दुकान पर आने से पहले Google पर सर्च करता है। वो जानना चाहता है कि आप क्या सर्विस देते हैं, क्वालिटी कैसी है, और संपर्क कैसे किया जाए।",
+      "emotion": {
+        "primary": "curiosity",
+        "secondary": "clarity",
+        "intensity": 0.55,
+        "confidence": "human-verified"
+      },
+      "viewer_goal": "Google सर्च व्यवहार समझें",
+      "visual": "स्मार्टफ़ोन पर Google सर्च और 3 मुख्य चेकलिस्ट: Services, Quality, Contact",
+      "shot": "screen close-up",
+      "motion": "ui-reveal",
+      "caption": "पहले Google पर सर्च",
+      "audio": "audio/voiceover.mp3",
+      "asset_strategy": "react-svg",
+      "evidence": "modern customer journey"
+    },
+    {
+      "id": "b03",
+      "start": 15.0,
+      "end": 30.0,
+      "voice": "लेकिन जब उसे बिजनेस की सही जानकारी, सर्विसेज, फोटोज और प्राइसिंग नहीं मिलती, तो वो दूसरे बिजनेस की वेबसाइट खोल लेता है जहां सब कुछ एक ही जगह मिल जाता है।",
+      "emotion": {
+        "primary": "concern",
+        "secondary": "frustration",
+        "intensity": 0.65,
+        "confidence": "human-verified"
+      },
+      "viewer_goal": "वेबसाइट न होने का नुकसान समझें",
+      "visual": "स्प्लिट तुलना: जानकारी गायब बनाम प्रतियोगी की पूरी वेबसाइट",
+      "shot": "split comparison",
+      "motion": "guided-reveal",
+      "caption": "दूसरे की वेबसाइट खुली!",
+      "audio": "audio/voiceover.mp3",
+      "asset_strategy": "react-svg",
+      "evidence": "customer lost to competitor"
+    },
+    {
+      "id": "b04",
+      "start": 30.0,
+      "end": 36.5,
+      "voice": "सोचिए, ग्राहक को जरूरत आपकी सर्विस की थी, लेकिन काम किसी और को मिल गया!",
+      "emotion": {
+        "primary": "concern",
+        "secondary": "urgency",
+        "intensity": 0.7,
+        "confidence": "human-verified"
+      },
+      "viewer_goal": "खोने का अहसास महसूस करें",
+      "visual": "मिस हुआ ग्राहक और खोया हुआ मुनाफा (Lost Deal Alert)",
+      "shot": "focused impact punch",
+      "motion": "spring-accent",
+      "caption": "काम किसी और को मिला!",
+      "audio": "audio/voiceover.mp3",
+      "asset_strategy": "react-svg",
+      "evidence": "missed revenue reality"
+    },
+    {
+      "id": "b05",
+      "start": 36.5,
+      "end": 51.0,
+      "voice": "इसी समस्या का समाधान है एक प्रोफेशनल बिजनेस वेबसाइट। जहां आपकी सर्विसेज, फोटोज, रिव्यूज, लोकेशन और WhatsApp सब एक ही जगह हो!",
+      "emotion": {
+        "primary": "relief",
+        "secondary": "hope",
+        "intensity": 0.75,
+        "confidence": "human-verified"
+      },
+      "viewer_goal": "समाधान देखें",
+      "visual": "साफ और आधुनिक वेबसाइट मॉकअप: 4 फीचर्स (Services, Reviews, Map, WhatsApp)",
+      "shot": "hero product showcase",
+      "motion": "interface-walkthrough",
+      "caption": "समाधान: बिजनेस वेबसाइट",
+      "audio": "audio/voiceover.mp3",
+      "asset_strategy": "react-svg",
+      "evidence": "complete website architecture"
+    },
+    {
+      "id": "b06",
+      "start": 51.0,
+      "end": 66.0,
+      "voice": "अब सवाल यह नहीं कि आपको वेबसाइट चाहिए या नहीं, सवाल यह है कि ऑनलाइन आने वाले कितने संभावित ग्राहक आपसे संपर्क नहीं कर पा रहे हैं। हम आपके लिए ऐसी वेबसाइट बना सकते हैं!",
+      "emotion": {
+        "primary": "confidence",
+        "secondary": "authority",
+        "intensity": 0.8,
+        "confidence": "human-verified"
+      },
+      "viewer_goal": "निर्णय लेने का महत्व समझें",
+      "visual": "शानदार और उपयोगी वेबसाइट का मोबाइल और डेस्कटॉप प्रीव्यू",
+      "shot": "multi-device responsive preview",
+      "motion": "parallax-glide",
+      "caption": "कितने ग्राहक छूट रहे हैं?",
+      "audio": "audio/voiceover.mp3",
+      "asset_strategy": "react-svg",
+      "evidence": "professional capability"
+    },
+    {
+      "id": "b07",
+      "start": 66.0,
+      "end": 76.4,
+      "voice": "अपनी दुकान या बिजनेस का नाम WhatsApp पर भेजिए, हम आपको दिखाएंगे कि वेबसाइट कैसी दिखेगी। अभी मैसेज करें - Vismart Studio!",
+      "emotion": {
+        "primary": "confidence",
+        "secondary": "enthusiasm",
+        "intensity": 0.9,
+        "confidence": "human-verified"
+      },
+      "viewer_goal": "तुरंत WhatsApp पर मैसेज करें",
+      "visual": "Vismart Studio VIP CTA Card, WhatsApp बटन, फ्री डेमो ऑफर",
+      "shot": "center VIP branding card",
+      "motion": "spring-reveal",
+      "caption": "Vismart Studio",
+      "audio": "audio/voiceover.mp3",
+      "asset_strategy": "react-svg",
+      "evidence": "direct studio contact"
+    }
+  ]
+}
