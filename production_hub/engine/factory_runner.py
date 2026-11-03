@@ -55,7 +55,7 @@ def render(job):
         audio_rel = f"factory-audio/{job['id']}.mp3"
         audio_path = REMOTION / "public" / audio_rel
         try:
-            seconds = asyncio.run(generate_speech(" ".join(payload["scenes"]), str(audio_path), voice=payload["voice"], rate="+0%"))
+            seconds = asyncio.run(asyncio.wait_for(generate_speech(" ".join(payload["scenes"]), str(audio_path), voice=payload["voice"], rate="+0%"), timeout=90))
             if seconds > payload["duration"] - 0.25:
                 raise ValueError(f"Voice is {seconds}s; shorten copy or increase duration (no silent truncation)")
             props["audio"] = audio_rel
